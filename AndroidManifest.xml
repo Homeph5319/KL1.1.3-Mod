@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" package="com.gameloft.android.GloftKLMF" platformBuildVersionCode="24" platformBuildVersionName="7.0">
     <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="false" android:xlargeScreens="true"/>
     <application android:allowBackup="false" android:debuggable="false" android:hardwareAccelerated="true" android:icon="@drawable/icon" android:label="@string/MIDlet_Name" android:largeHeap="true" android:manageSpaceActivity=".ManagerSpace" android:theme="@style/Theme.wrapper.black.notitlebar.fullscreen">
-        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|density|layoutDirection|fontScale" android:label="@string/MIDlet_Name" android:launchMode="singleTop" android:name=".StartGame" android:resizeableActivity="false" android:screenOrientation="sensorLandscape">
+        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|density|layoutDirection|fontScale" android:label="@string/MIDlet_Name" android:launchMode="singleTop" android:name=".StartGame" android:resizeableActivity="false" android:screenOrientation="sensorLandscape" android:theme="@style/AppTheme.CutoutSupport">
             <intent-filter/>
         </activity>
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
@@ -69,7 +69,7 @@
         </activity>
         <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|density|layoutDirection|fontScale" android:multiprocess="false" android:name="com.gameloft.android2d.igp.IGPDownloadFreemium" android:noHistory="false" android:screenOrientation="sensorLandscape" android:theme="@style/Theme.Transparent_popup"/>
         <activity android:name=".SoftKeyBoardActivity" android:windowSoftInputMode="adjustPan"/>
-        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|density|layoutDirection|fontScale" android:launchMode="singleTop" android:name=".S800x480.GloftKLMF" android:resizeableActivity="false" android:screenOrientation="sensorLandscape">
+        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|density|layoutDirection|fontScale" android:launchMode="singleTop" android:name=".S800x480.GloftKLMF" android:resizeableActivity="false" android:screenOrientation="sensorLandscape" android:theme="@style/AppTheme.CutoutSupport">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>

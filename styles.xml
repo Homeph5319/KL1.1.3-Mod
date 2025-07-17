@@ -281,4 +281,8 @@
     <style name="Theme.wrapper.notitlebar" parent="@android:style/Theme.NoTitleBar" />
     <style name="Theme.wrapper.progressbar.horizontal" parent="@android:style/Widget.ProgressBar.Horizontal" />
     <style name="Theme.wrapper.progressbar" parent="@android:style/Widget.ProgressBar" />
+    <style name="AppTheme.CutoutSupport" parent="@style/Theme.wrapper.black.notitlebar.fullscreen">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+    </style>
 </resources>
