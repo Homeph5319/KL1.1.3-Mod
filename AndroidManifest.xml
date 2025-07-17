@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" package="com.gameloft.android.GloftKLMF" platformBuildVersionCode="24" platformBuildVersionName="7.0">
+    <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="false" android:xlargeScreens="true"/>
+    <application android:allowBackup="false" android:debuggable="false" android:hardwareAccelerated="true" android:icon="@drawable/icon" android:label="@string/MIDlet_Name" android:largeHeap="true" android:manageSpaceActivity=".ManagerSpace" android:theme="@style/Theme.wrapper.black.notitlebar.fullscreen">
+        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|density|layoutDirection|fontScale" android:label="@string/MIDlet_Name" android:launchMode="singleTop" android:name=".StartGame" android:resizeableActivity="false" android:screenOrientation="sensorLandscape">
+            <intent-filter/>
+        </activity>
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+        <meta-data android:name="com.samsung.android.infinitedisplay.supported" android:value="yes"/>
+        <meta-data android:name="android.max_aspect" android:value="2.5"/>
+        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|density|layoutDirection|fontScale" android:name="com.gameloft.android.wrapper.GamePermission" android:screenOrientation="sensorLandscape" android:theme="@style/Theme.wrapper.translucent.notitlebar.fullscreen"/>
+        <service android:name="com.gameloft.android.GloftKLMF.GCMIntentService"/>
+        <receiver android:name="com.google.android.gcm.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <category android:name="com.gameloft.android.GloftKLMF"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+                <category android:name="com.gameloft.android.GloftKLMF"/>
+            </intent-filter>
+        </receiver>
+        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|smallestScreenSize|density|fontScale" android:name="com.gameloft.android2d.iap.utils.MyWebView" android:theme="@style/Theme.wrapper.translucent.notitlebar.fullscreen"/>
+        <provider android:authorities="com.gameloft.android.GloftKLMF.provider" android:exported="false" android:grantUriPermissions="true" android:name="android.support.v4.content.FileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/provider_paths"/>
+        </provider>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation" android:name=".AdServerInterstitial" android:theme="@style/Theme.wrapper.translucent.notitlebar.fullscreen"/>
+        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale" android:hardwareAccelerated="true" android:name=".AdServerVideos" android:screenOrientation="landscape" android:theme="@style/Theme.wrapper.translucent.notitlebar.fullscreen"/>
+        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|density|layoutDirection|fontScale" android:hardwareAccelerated="true" android:name="com.gameloft.glads.GLAdFullScreen" android:screenOrientation="unspecified" android:theme="@style/Theme.wrapper.translucent.notitlebar.fullscreen"/>
+        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|density|fontScale" android:hardwareAccelerated="true" android:name="com.gameloft.glads.MRAIDFullScreen" android:screenOrientation="unspecified" android:theme="@style/Theme.wrapper.translucent.notitlebar.fullscreen"/>
+        <activity android:name="com.gameloft.glads.vast.activity.VASTActivity" android:screenOrientation="landscape"/>
+        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|density|fontScale" android:hardwareAccelerated="true" android:name="com.gameloft.glads.VASTFullScreen" android:screenOrientation="unspecified" android:theme="@style/Theme.wrapper.translucent.notitlebar.fullscreen"/>
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="locale|keyboardHidden|orientation|smallestScreenSize|density" android:finishOnTaskLaunch="true" android:label="@string/MIDlet_Name" android:multiprocess="false" android:name=".ManagerSpace" android:screenOrientation="portrait" android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize" android:name="com.facebook.FacebookActivity" android:theme="@style/com_facebook_activity_theme"/>
+        <activity android:name="com.facebook.CustomTabMainActivity"/>
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/app_id"/>
+        <receiver android:name=".PushNotification.LocalPushReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".PushNotification.PushIntentReceiver">
+            <intent-filter>
+                <action android:name="com.gameloft.android.GloftKLMF.PNBroadcast"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".PushNotification.PushDeleteReceiver">
+            <intent-filter>
+                <action android:name="com.gameloft.android.GloftKLMF.PNDeleteBroadcast"/>
+            </intent-filter>
+        </receiver>
+        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|density|layoutDirection|fontScale" android:label="@string/MIDlet_Name" android:launchMode="singleTop" android:name=".Start" android:resizeableActivity="false" android:screenOrientation="sensorLandscape" android:theme="@style/Theme.SMSWrapperBase">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="com.gameloft.android.UNLOCK_GAME"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|density|layoutDirection|fontScale" android:name=".SMSSender" android:resizeableActivity="false" android:screenOrientation="sensorLandscape" android:theme="@style/Theme.SMSWrapperBase"/>
+        <provider android:authorities="com.gameloft.android.GloftKLMF.KeyProvider" android:exported="true" android:multiprocess="true" android:name=".KeyProvider" android:permission="glshare.permission.ACCESS_SHARED_DATA"/>
+        <meta-data android:name="CHANNEL_ID" android:value="0"/>
+        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|density|layoutDirection|fontScale" android:launchMode="singleTop" android:multiprocess="false" android:name="com.gameloft.android2d.igp.IGPScreenshot" android:noHistory="false" android:screenOrientation="sensorLandscape"/>
+        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|density|layoutDirection|fontScale" android:launchMode="singleTop" android:multiprocess="false" android:name="com.gameloft.android2d.igp.IGP" android:noHistory="false" android:screenOrientation="sensorLandscape" android:theme="@style/Theme.igp.Translucent.notitlebar.fullscreen"/>
+        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|density|layoutDirection|fontScale" android:launchMode="singleTop" android:multiprocess="false" android:name="com.gameloft.android2d.igp.IGPLoading" android:noHistory="false" android:screenOrientation="sensorLandscape" android:theme="@style/Theme.igp.Translucent.notitlebar.fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|density|layoutDirection|fontScale" android:multiprocess="false" android:name="com.gameloft.android2d.igp.IGPDownloadFreemium" android:noHistory="false" android:screenOrientation="sensorLandscape" android:theme="@style/Theme.Transparent_popup"/>
+        <activity android:name=".SoftKeyBoardActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|density|layoutDirection|fontScale" android:launchMode="singleTop" android:name=".S800x480.GloftKLMF" android:resizeableActivity="false" android:screenOrientation="sensorLandscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+    </application>
+    <uses-feature android:name="android.hardware.touchscreen"/>
+    <uses-feature android:name="android.hardware.screen.landscape"/>
+    <permission android:name="com.gameloft.android.GloftKLMF.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
+    <uses-feature android:name="android.hardware.touchscreen.multitouch"/>
+    <uses-feature android:glEsVersion="0x00020000"/>
+    <permission android:name="glshare.permission.ACCESS_SHARED_DATA" android:protectionLevel="signature"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="com.gameloft.android.GloftKLMF.permission.C2D_MESSAGE"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="glshare.permission.ACCESS_SHARED_DATA"/>
+</manifest>
