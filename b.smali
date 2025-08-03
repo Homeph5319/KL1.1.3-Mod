@@ -31,49 +31,55 @@
     return v0
 .end method
 
-# --- FULL-STRETCH DRAW ---
+# --- FULL-STRETCH DRAW WITH DISPLAYMETRICS ---
 .method protected final onDraw(Landroid/graphics/Canvas;)V
-    .locals 10
+    .locals 11
 
-    # Save canvas state
+    # Save canvas
     invoke-virtual {p1}, Landroid/graphics/Canvas;->save()I
     move-result v0
 
-    # Screen width & height
-    invoke-virtual {p0}, Lb/a/b/b;->getWidth()I
-    move-result v1
-    invoke-virtual {p0}, Lb/a/b/b;->getHeight()I
-    move-result v2
+    # Get DisplayMetrics
+    invoke-virtual {p0}, Landroid/view/View;->getContext()Landroid/content/Context;
+    move-result-object v1
+    invoke-virtual {v1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+    move-result-object v1
+    invoke-virtual {v1}, Landroid/content/res/Resources;->getDisplayMetrics()Landroid/util/DisplayMetrics;
+    move-result-object v1
+
+    # Get real screen width & height
+    iget v2, v1, Landroid/util/DisplayMetrics;->widthPixels:I
+    iget v3, v1, Landroid/util/DisplayMetrics;->heightPixels:I
 
     # Game resolution 480x800
-    const/16 v3, 0x1e0
-    const/16 v4, 0x320
+    const/16 v4, 0x1e0
+    const/16 v5, 0x320
 
     # Convert to float
-    int-to-float v5, v1
     int-to-float v6, v2
     int-to-float v7, v3
     int-to-float v8, v4
+    int-to-float v9, v5
 
-    # Compute scaleX and scaleY separately
-    div-float v5, v5, v7   # scaleX
-    div-float v6, v6, v8   # scaleY
+    # Compute scaleX and scaleY separately (full stretch)
+    div-float v6, v6, v8  # scaleX
+    div-float v7, v7, v9  # scaleY
 
-    # Apply stretch scaling (no centering)
-    invoke-virtual {p1, v5, v6}, Landroid/graphics/Canvas;->scale(FF)V
+    # Apply stretch scaling
+    invoke-virtual {p1, v6, v7}, Landroid/graphics/Canvas;->scale(FF)V
 
     # Draw game
-    iget-object v7, p0, Lb/a/b/b;->akM:Lb/a/b/q;
-    invoke-virtual {v7, p1}, Lb/a/b/q;->onDraw(Landroid/graphics/Canvas;)V
+    iget-object v10, p0, Lb/a/b/b;->akM:Lb/a/b/q;
+    invoke-virtual {v10, p1}, Lb/a/b/q;->onDraw(Landroid/graphics/Canvas;)V
 
     # Restore canvas
     invoke-virtual {p1, v0}, Landroid/graphics/Canvas;->restoreToCount(I)V
     return-void
 .end method
 
-# --- FULL-STRETCH TOUCH ---
+# --- FULL-STRETCH TOUCH WITH DISPLAYMETRICS ---
 .method public final onTouchEvent(Landroid/view/MotionEvent;)Z
-    .locals 12
+    .locals 13
 
     # Get raw touch
     invoke-virtual {p1}, Landroid/view/MotionEvent;->getX()F
@@ -81,38 +87,43 @@
     invoke-virtual {p1}, Landroid/view/MotionEvent;->getY()F
     move-result v1
 
-    # Screen size
-    invoke-virtual {p0}, Lb/a/b/b;->getWidth()I
-    move-result v2
-    invoke-virtual {p0}, Lb/a/b/b;->getHeight()I
-    move-result v3
+    # Get DisplayMetrics for real screen size
+    invoke-virtual {p0}, Landroid/view/View;->getContext()Landroid/content/Context;
+    move-result-object v2
+    invoke-virtual {v2}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+    move-result-object v2
+    invoke-virtual {v2}, Landroid/content/res/Resources;->getDisplayMetrics()Landroid/util/DisplayMetrics;
+    move-result-object v2
 
-    # Game size 480x800
-    const/16 v4, 0x1e0
-    const/16 v5, 0x320
+    iget v3, v2, Landroid/util/DisplayMetrics;->widthPixels:I
+    iget v4, v2, Landroid/util/DisplayMetrics;->heightPixels:I
+
+    # Game resolution 480x800
+    const/16 v5, 0x1e0
+    const/16 v6, 0x320
 
     # Convert to float
-    int-to-float v6, v2    # screenW
-    int-to-float v7, v3    # screenH
-    int-to-float v8, v4    # gameW
-    int-to-float v9, v5    # gameH
+    int-to-float v7, v3   # screenW
+    int-to-float v8, v4   # screenH
+    int-to-float v9, v5   # gameW
+    int-to-float v10, v6  # gameH
 
-    # Compute scaleX and scaleY
-    div-float v6, v6, v8   # scaleX
-    div-float v7, v7, v9   # scaleY
+    # Compute scaleX and scaleY for stretch
+    div-float v7, v7, v9
+    div-float v8, v8, v10
 
-    # Adjust touch coordinates for stretched scaling
-    div-float v0, v0, v6   # gameX
-    div-float v1, v1, v7   # gameY
+    # Adjust touch to game coordinates
+    div-float v0, v0, v7
+    div-float v1, v1, v8
 
     # Clone MotionEvent and set scaled location
     invoke-static {p1}, Landroid/view/MotionEvent;->obtain(Landroid/view/MotionEvent;)Landroid/view/MotionEvent;
-    move-result-object v10
-    invoke-virtual {v10, v0, v1}, Landroid/view/MotionEvent;->setLocation(FF)V
+    move-result-object v11
+    invoke-virtual {v11, v0, v1}, Landroid/view/MotionEvent;->setLocation(FF)V
 
     # Forward to game
-    iget-object v11, p0, Lb/a/b/b;->akM:Lb/a/b/q;
-    invoke-virtual {v11, v10}, Lb/a/b/q;->onTouchEvent(Landroid/view/MotionEvent;)Z
+    iget-object v12, p0, Lb/a/b/b;->akM:Lb/a/b/q;
+    invoke-virtual {v12, v11}, Lb/a/b/q;->onTouchEvent(Landroid/view/MotionEvent;)Z
     move-result v0
 
     return v0
